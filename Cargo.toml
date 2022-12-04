@@ -1,0 +1,37 @@
+[package]
+name = "mbr"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cmd = { path = "./cmd" }
+pd_client = { path = "./components/pd_client" }
+# etcd_client = { path = "./components/etcd_client" }
+error_code = { path = "./components/error_code" }
+anyhow = "1.0.66"
+tikv-client = { version = "0.1.0" }
+kvproto = { git = "https://github.com/pingcap/kvproto.git" }
+futures = "0.3"
+hex = {version = "0.3"}
+grpcio = { version = "0.8.*", default-features = false }
+
+
+[workspace]
+members = ["components/pd_client", "./cmd"]
+
+[dependencies.tidb_query_datatype]
+git = "https://github.com/tikv/tikv.git"
+
+
+
+[patch.crates-io]
+# TODO: remove this when new raft-rs is published.
+raft = { git = "https://github.com/tikv/raft-rs", branch = "master" }
+raft-proto = { git = "https://github.com/tikv/raft-rs", branch = "master" }
+protobuf = { git = "https://github.com/pingcap/rust-protobuf", branch = "v2.8" }
+protobuf-codegen = { git = "https://github.com/pingcap/rust-protobuf", branch = "v2.8" }
+
+# This is used for tidb_query_datatype building
+crossbeam-deque = { git = "https://github.com/crossbeam-rs/crossbeam", rev = "41ed3d948720f26149b2ebeaf58fe8a193134056" }
