@@ -8,6 +8,7 @@ use kvproto::{
     brpb_grpc::BackupClient,
 };
 use mbr::Range;
+// use pd_client::;
 
 // use tidb_query_datatype::codec::table;
 // use tikv_client::Timestamp;
@@ -18,14 +19,15 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-pub fn run_backup(backup_cmd: BackupInfo) {
+pub fn run_backup(_backup_cmd: BackupInfo) {
     let pd = "127.0.0.1:2379";
-    let kv = "127.0.0.1:21080";
+    let kv = "127.0.0.1:20180";
     let path = "/Users/suzhipeng/Desktop/dump";
-    let tso = pd_client::current_timestamp(pd);
-    println!("{:#?}", tso);
+    // let tso = pd_client::current_timestamp(pd);
+    // println!("{:#?}", tso);
+    let table_range = Range::new(70);
 
-    // backup_range(table_range, kv.to_owned(), path.to_owned(), tso.unwrap());
+    backup_range(table_range, kv.to_owned(), path.to_owned());
 }
 
 pub fn make_local_backend(path: &Path) -> StorageBackend {
@@ -45,7 +47,7 @@ pub fn backup_range(range: Range, store_addr: String, external_storage: String) 
     req.set_end_key(range.end_key);
 
     req.set_start_version(0);
-    req.set_end_version(123);
+    req.set_end_version(438366606733082625);
     // Set an unique path to avoid AlreadyExists error.
     req.set_storage_backend(make_local_backend(&Path::new(&external_storage)));
     let mut stream = client.backup(&req).unwrap();

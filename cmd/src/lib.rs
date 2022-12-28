@@ -1,5 +1,3 @@
-#![feature(specialization)]
-
 use anyhow::{anyhow, Result};
 use clap::{Parser, Subcommand};
 
