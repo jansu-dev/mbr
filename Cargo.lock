@@ -1044,6 +1044,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "grpcio-health"
+version = "0.10.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a37eae605cd21f144b7c7fd0e64e57af9f73d132756fef5b706db110c3ec7ea0"
+dependencies = [
+ "futures-executor",
+ "futures-util",
+ "grpcio",
+ "log",
+ "protobuf",
+]
+
+[[package]]
 name = "grpcio-sys"
 version = "0.10.3+1.44.0-patched"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1392,7 +1405,9 @@ dependencies = [
  "anyhow",
  "cmd",
  "futures 0.3.25",
+ "futures-channel",
  "grpcio",
+ "grpcio-health",
  "hex 0.3.2",
  "kvproto",
  "pd_client",
